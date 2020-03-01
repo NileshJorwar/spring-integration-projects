@@ -1,0 +1,44 @@
+{
+  "rabbit_version" : "3.8.2",
+  "queues":
+  [
+    {
+      "name":"ChickenFire",
+      "vhost":"/",
+      "durable":true
+    },
+    {
+      "name":"ChickenFire.dlq",
+      "vhost":"/",
+      "durable":true
+    }
+  ],
+  "bindings":[
+    {
+      "source":"ChickenFireExchange",
+      "vhost":"/",
+      "destination":"ChickenFire",
+      "destination_type":"queue",
+      "routing_key":"chickenfire",
+      "arguments":{}
+    },
+    {
+      "source":"ChickenFireExchange",
+      "vhost":"/",
+      "destination":"ChickenFire.dlq",
+      "destination_type":"queue",
+      "routing_key":"chickenfire",
+      "arguments":{}
+    }
+  ],
+  "exchanges":
+  [
+    "name": "ChickenFireExchange",
+    "vhost":"/",
+    "type":"topic",
+    "durable":true,
+    "auto_delete":false,
+    "internal":false,
+    "arguments": {}
+  ]
+}
